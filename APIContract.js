@@ -1,5 +1,6 @@
-const CONTEXT_BASE_PATH = ({entityTypePlural}) =>
-  `"/${entityTypePlural.toLowerCase()}/":`;
+const {CONTEXT_BASE_ENTITY_PATH, CONTEXT_BASE_PATH} = require("./APIPath");
+const {parseArgsBase} = require("./Args");
+const {addEmptySpace} = require("./Util");
 
 const GET_ALL = ({entityType, entityTypePlural}) =>
   `
@@ -44,7 +45,7 @@ const POST_ENTITY_CREATE = ({entityType}) =>
 
 const CONTEXT_ENTITY_PATH = ({entityTypePlural}, idDescriptor = "id") =>
   `
-"/${entityTypePlural.toLowerCase()}/{${idDescriptor}}":
+${CONTEXT_BASE_ENTITY_PATH({entityTypePlural}, idDescriptor)}:
   parameters:
   - name: ${idDescriptor}
     in: path
@@ -124,40 +125,15 @@ delete:
           schema:
             $ref: "commons.yaml#/components/schemas/RequestError"`.trim();
 
-const addEmptySpace = (str, amount = 1) =>
-  str
-    .split("\n")
-    .map((s) => " ".repeat(amount) + s)
-    .join("\n");
-
 const addTwoEmptySpace = (str) => addEmptySpace(str, 2);
 
 const cominbePathWithVerbs = (path, verbs) =>
   path.split("\nparameters:") + "\n" + verbs.map(addTwoEmptySpace).join("\n");
 
-//p=e e=Component ep=Components id=componentId v=g,ga,d,po,pa
-//p=b
-
-const args = process.argv
-  .slice(2)
-  .map((arg) => arg.split("="))
-  .reduce((prev, entry) => {
-    prev[entry[0]] = entry[1];
-    return prev;
-  }, {});
-
-if (args["v"]) {
-  args["v"] = args["v"].split(",");
-}
-console.log(args);
-console.log("\n\n");
-
-const pathFunctions = {e: CONTEXT_ENTITY_PATH, b: CONTEXT_BASE_PATH};
-let path;
-if (args["p"]) {
-  path = pathFunctions[args["p"]]({entityTypePlural: args["ep"]}, args["id"]);
-}
-
+const pathFunctions = {
+  e: CONTEXT_ENTITY_PATH,
+  b: (...args) => CONTEXT_BASE_PATH(...args) + ":",
+};
 const verbFunctions = {
   g: GET_ENTITY,
   ga: GET_ALL,
@@ -165,10 +141,27 @@ const verbFunctions = {
   po: POST_ENTITY_CREATE,
   pa: PATCH_ENTITY_DELTA,
 };
+
+//p=e e=Component ep=Components id=componentId v=g,ga,d,po,pa
+//p=b
+
+const splitables = ["v", ...Object.keys(verbFunctions)];
+const args = parseArgsBase(splitables);
+
+console.log(args);
+console.log("\n\n");
+
+const firstArg = {entityType: args["e"], entityTypePlural: args["ep"]};
+
+let path;
+if (args["p"]) {
+  path = pathFunctions[args["p"]](firstArg, args["id"]);
+}
+
 let verbs;
 if (args["v"]) {
   verbs = args["v"].map((verb) =>
-    verbFunctions[verb]({entityType: args["e"], entityTypePlural: args["ep"]})
+    verbFunctions[verb](firstArg, ...(args[verb] ?? []))
   );
 }
 
