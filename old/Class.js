@@ -1,4 +1,4 @@
-const {firstLowerCase} = require("./Util");
+const {firstLowerCase} = require("../Util");
 
 const BUILDER = (entityType) => `${entityType}.builder().build();`;
 

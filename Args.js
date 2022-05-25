@@ -1,4 +1,6 @@
-const parseArgsBase = (splitables) => {
+const {firstLowerCase, firstUpperCase} = require("./Util");
+
+const parseArgsBase = (splitables = []) => {
   const args = process.argv
     .slice(2)
     .map((arg) => arg.split("="))
@@ -14,4 +16,30 @@ const parseArgsBase = (splitables) => {
   return args;
 };
 
-module.exports = {parseArgsBase};
+const getEntityType = (args) => args["e"];
+const getEntityTypePlural = (args) => args["ep"] ?? args["e"] + "s";
+
+const getEntityInfObj = (args) => ({
+  entityType: getEntityType(args),
+  entityTypePlural: getEntityTypePlural(args),
+});
+
+const replacementArgs = (args) => ({
+  $project$: args["pro"],
+  $company$: args["com"],
+  $context$: args["con"],
+  $ENTITY$: getEntityType(args).toUpperCase(),
+  $Entity$: getEntityType(args),
+  $entity$: firstLowerCase(getEntityType(args)),
+  $EntityPlural$: getEntityTypePlural(args),
+  $entityPlural$: firstLowerCase(getEntityTypePlural(args)),
+  $api$: firstUpperCase(getEntityTypePlural(args).toLowerCase()) + "Api",
+});
+
+module.exports = {
+  parseArgsBase,
+  getEntityType,
+  getEntityTypePlural,
+  getEntityInfObj,
+  replacementArgs,
+};

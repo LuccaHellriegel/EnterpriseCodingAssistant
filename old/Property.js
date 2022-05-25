@@ -1,4 +1,4 @@
-const {firstLowerCase} = require("./Util");
+const {firstLowerCase} = require("../Util");
 
 const PROPERTY_MOCK = (className) =>
   `private final ${className} ${firstLowerCase(

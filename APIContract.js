@@ -5,10 +5,10 @@ const {addEmptySpace} = require("./Util");
 const GET_ALL = ({entityType, entityTypePlural}) =>
   `
 get:
-  operationId: getAll${entityType}
+  operationId: getAll${entityTypePlural}
   responses:  
     200:  
-      description: All ${entityTypePlural} that were found, might be an empty array  
+      description: all ${entityTypePlural} that were found, might be an empty array  
       content:  
         application/json:  
           schema:  
@@ -34,7 +34,7 @@ post:
           schema:  
             $ref: "#/components/schemas/${entityType}"  
     400:  
-      description: Invalid ${entityType} create-request  
+      description: invalid ${entityType} create-request  
       content:  
         application/json:  
           schema:  
@@ -65,7 +65,7 @@ get:
           schema:
             $ref: "#/components/schemas/${entityType}"
     404:
-      description: No ${entityType} with given id
+      description: no ${entityType} with given id
       content:
         application/json:
           schema:
@@ -89,7 +89,7 @@ patch:
           schema:
             $ref: "#/components/schemas/${entityType}"
     404:
-      description: No ${entityType} with given id
+      description: no ${entityType} with given id
       content:
         application/json:
           schema:
@@ -119,7 +119,7 @@ delete:
           schema:
             $ref: "commons.yaml#/components/schemas/RequestError"    
     404:
-      description: No ${entityType} with the given ID
+      description: no ${entityType} with the given ID
       content:
         application/json:
           schema:
@@ -172,3 +172,5 @@ if (path && verbs && verbs.length > 0) {
 } else if (verbs && verbs.length > 0) {
   console.log(verbs.join("\n"));
 }
+
+//TODO: generate basic object schema for Entity (with id + all of EntityCreate) + EntityCreate

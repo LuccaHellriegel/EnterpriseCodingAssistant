@@ -1,4 +1,4 @@
-const {addEmptySpace} = require("./Util");
+const {addEmptySpace} = require("../Util");
 
 const TEST = (testName, givenBody = "", whenBody = "", thenBody = "") =>
   `

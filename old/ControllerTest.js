@@ -1,9 +1,11 @@
-const {CONTEXT_BASE_PATH} = require("./APIPath");
-const {parseArgsBase} = require("./Args");
+const {CONTEXT_BASE_PATH} = require("../APIPath");
+const {parseArgsBase} = require("../Args");
 const {BUILDER, NEW_INSTANCE} = require("./Class");
 const {PROPERTY_NEW, PROPERTY_MOCK} = require("./Property");
 const {TEST} = require("./Test");
-const {firstLowerCase, addEmptySpace} = require("./Util");
+const {firstLowerCase, addEmptySpace} = require("../Util");
+
+//TODO: application for update and normal domain service for rest
 
 const controllerName = (entityType) => entityType + "Controller";
 
@@ -177,7 +179,7 @@ const BASE_TESTS = (props) => {
         MOCKITO_WHEN(
           serviceName,
           "update" + props.entityType,
-          "any(),any()",
+          "any(), any()",
           entityLowerCase
         ),
       ].join("\n"),
@@ -187,7 +189,7 @@ const BASE_TESTS = (props) => {
   ];
 };
 
-const CONTROLLER_PROPERTIES = (props, deps) =>
+const CONTROLLER_PROPERTIES = (props, deps = []) =>
   [
     `private final ${props.entityType}Mapper mapper = new ${props.entityType}MapperImpl();`,
     PROPERTY_MOCK(props.entityType + "Service"),
