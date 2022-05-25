@@ -50,7 +50,7 @@ public class $Entity$Controller extends BaseController implements $api$ {
   public Mono<ResponseEntity<$Entity$Dto>> get$Entity$(String $entity$Id,
       ServerWebExchange exchange) {
     return $entity$Service
-        .get$Entity$ById($entity$Id)
+        .get$Entity$($entity$Id)
         .map($entity$Mapper::toDto)
         .map(ResponseEntity::ok);
   }

@@ -20,7 +20,7 @@ public class $Entity$ApplicationService {
 
   public Mono<$Entity$> update$Entity$($Entity$DeltaDto delta, String $entity$Id) {
     return validateDelta(delta)
-        .then($entity$Service.get$Entity$ById($entity$Id))
+        .then($entity$Service.get$Entity$($entity$Id))
         .flatMap($entity$ -> apply$Entity$Delta($entity$, delta))
         //TODO
         .flatMap($entity$Service::validate)

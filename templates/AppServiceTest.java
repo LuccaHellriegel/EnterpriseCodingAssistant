@@ -23,7 +23,7 @@ public class $Entity$ApplicationServiceTest {
       $entity$Service);
 
   public void mockGet$Entity$($Entity$ $entity$) {
-    when($entity$Service.get$Entity$ById($entity$.getId())).thenReturn(Mono.just($entity$));
+    when($entity$Service.get$Entity$($entity$.getId())).thenReturn(Mono.just($entity$));
   }
 
   public void mockValidity($Entity$ $entity$) {
@@ -56,7 +56,7 @@ public class $Entity$ApplicationServiceTest {
     // THEN
     StepVerifier.create($entity$ApplicationService.update$Entity$(delta, $entity$.getId()))
         .expectError(Invalid$Entity$DeltaException.class);
-    verify($entity$Service, times(1)).get$Entity$ById($entity$.getId());
+    verify($entity$Service, times(1)).get$Entity$($entity$.getId());
     verify($entity$Service, times(0)).validate($entity$);
     verify($entity$Service, times(0)).save$Entity$($entity$);
   }
@@ -73,7 +73,7 @@ public class $Entity$ApplicationServiceTest {
     // THEN
     StepVerifier.create($entity$ApplicationService.update$Entity$(delta, $entity$.getId()))
         .expectError(Invalid$Entity$Exception.class);
-    verify($entity$Service, times(1)).get$Entity$ById($entity$.getId());
+    verify($entity$Service, times(1)).get$Entity$($entity$.getId());
     verify($entity$Service, times(1)).validate($entity$);
     verify($entity$Service, times(0)).save$Entity$($entity$);
   }
@@ -90,7 +90,7 @@ public class $Entity$ApplicationServiceTest {
     // THEN
     StepVerifier.create($entity$ApplicationService.update$Entity$(delta, $entity$.getId()))
         .expectError(Duplicate$Entity$Exception.class);
-    verify($entity$Service, times(1)).get$Entity$ById($entity$.getId());
+    verify($entity$Service, times(1)).get$Entity$($entity$.getId());
     verify($entity$Service, times(1)).validate($entity$);
     verify($entity$Service, times(0)).save$Entity$($entity$);
   }
@@ -109,7 +109,7 @@ public class $Entity$ApplicationServiceTest {
     // THEN
     StepVerifier.create($entity$ApplicationService.update$Entity$(delta, $entity$.getId()))
         .expectNext(expected$Entity$).verifyComplete();
-    verify($entity$Service, times(1)).get$Entity$ById($entity$.getId());
+    verify($entity$Service, times(1)).get$Entity$($entity$.getId());
     verify($entity$Service, times(1)).validate($entity$);
     verify($entity$Service, times(1)).save$Entity$($entity$);
   }

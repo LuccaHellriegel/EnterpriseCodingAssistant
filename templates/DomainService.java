@@ -28,7 +28,7 @@ public class $Entity$Service {
     return validateUniqueness($entity$);
   }
 
-  public Mono<$Entity$> validateUniqueness($Entity$ $entity$) {
+  private Mono<$Entity$> validateUniqueness($Entity$ $entity$) {
     return similar$EntityPlural$Exist($entity$).map(duplicatesExist ->
         {
           if (duplicatesExist) {
@@ -45,7 +45,7 @@ public class $Entity$Service {
     return Mono.just(false);
   }
 
-  public Mono<$Entity$> get$Entity$ById(String id) {
+  public Mono<$Entity$> get$Entity$(String id) {
     return $entity$Repository.findById(id)
         .switchIfEmpty(Mono.error(new $Entity$NotFoundException(id)));
   }

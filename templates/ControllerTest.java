@@ -114,7 +114,7 @@ class $Entity$ControllerTest {
     // GIVEN
     var $entity$Id = "$entity$Id";
     var $entity$ = createValid$Entity$();
-    when($entity$Service.get$Entity$ById($entity$Id)).thenReturn(Mono.just($entity$));
+    when($entity$Service.get$Entity$($entity$Id)).thenReturn(Mono.just($entity$));
 
     // THEN
     givenController().when()
@@ -126,7 +126,7 @@ class $Entity$ControllerTest {
   public void gettingMissing$Entity$ShouldReturn404() {
     // GIVEN
     var $entity$Id = "$entity$Id";
-    when($entity$Service.get$Entity$ById($entity$Id)).thenReturn(
+    when($entity$Service.get$Entity$($entity$Id)).thenReturn(
         Mono.error(new $Entity$NotFoundException($entity$Id)));
 
     // THEN
