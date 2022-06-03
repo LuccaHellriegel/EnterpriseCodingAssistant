@@ -34,6 +34,7 @@ const replacementArgs = (args) => ({
   $EntityPlural$: getEntityTypePlural(args),
   $entityPlural$: firstLowerCase(getEntityTypePlural(args)),
   $api$: firstUpperCase(getEntityTypePlural(args).toLowerCase()) + "Api",
+  $apicontext$: getEntityType(args).toLowerCase(),
 });
 
 module.exports = {

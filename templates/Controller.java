@@ -35,7 +35,7 @@ public class $Entity$Controller extends BaseController implements $api$ {
         .flatMap($entity$Service::create$Entity$)
         .map($entity$Mapper::toDto)
         .map(dto -> ResponseEntity.created(
-            URI.create(BASE_PATH + "/$entityPlural$/" + dto.getId())).body(dto));
+            URI.create(BASE_PATH + "/$apicontext$/" + dto.getId())).body(dto));
   }
 
   @Override

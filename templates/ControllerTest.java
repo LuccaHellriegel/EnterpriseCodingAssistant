@@ -60,7 +60,7 @@ class $Entity$ControllerTest {
 
     // THEN
     givenController().when()
-        .get(BASE_PATH + "/$entityPlural$/")
+        .get(BASE_PATH + "/$apicontext$/")
         .then().status(HttpStatus.OK).extract().as($Entity$Dto[].class);
   }
 
@@ -75,9 +75,9 @@ class $Entity$ControllerTest {
     // THEN
     givenController()
         .body($entity$CreateDto).when()
-        .post(BASE_PATH + "/$entityPlural$/")
+        .post(BASE_PATH + "/$apicontext$/")
         .then().status(HttpStatus.CREATED)
-        .header("location", BASE_PATH + "/$entityPlural$/" + $entity$Id);
+        .header("location", BASE_PATH + "/$apicontext$/" + $entity$Id);
   }
 
   @Test
@@ -91,7 +91,7 @@ class $Entity$ControllerTest {
     // THEN
     givenController()
         .body($entity$CreateDto).when()
-        .post(BASE_PATH + "/$entityPlural$/")
+        .post(BASE_PATH + "/$apicontext$/")
         .then().status(HttpStatus.BAD_REQUEST);
   }
 
@@ -105,7 +105,7 @@ class $Entity$ControllerTest {
     // THEN
     givenController()
         .body($entity$CreateDto).when()
-        .post(BASE_PATH + "/$entityPlural$/")
+        .post(BASE_PATH + "/$apicontext$/")
         .then().status(HttpStatus.BAD_REQUEST);
   }
 
@@ -118,7 +118,7 @@ class $Entity$ControllerTest {
 
     // THEN
     givenController().when()
-        .get(BASE_PATH + "/$entityPlural$/" + $entity$Id)
+        .get(BASE_PATH + "/$apicontext$/" + $entity$Id)
         .then().status(HttpStatus.OK).extract().as($Entity$Dto.class);
   }
 
@@ -131,7 +131,7 @@ class $Entity$ControllerTest {
 
     // THEN
     givenController().when()
-        .get(BASE_PATH + "/$entityPlural$/" + $entity$Id)
+        .get(BASE_PATH + "/$apicontext$/" + $entity$Id)
         .then().status(HttpStatus.NOT_FOUND);
   }
 
@@ -147,7 +147,7 @@ class $Entity$ControllerTest {
     // THEN
     givenController()
         .body($entity$DeltaDto).when()
-        .patch(BASE_PATH + "/$entityPlural$/" + $entity$Id)
+        .patch(BASE_PATH + "/$apicontext$/" + $entity$Id)
         .then().status(HttpStatus.OK).extract().as($Entity$Dto.class);
   }
 
@@ -163,7 +163,7 @@ class $Entity$ControllerTest {
     // THEN
     givenController()
         .body($entity$DeltaDto).when()
-        .patch(BASE_PATH + "/$entityPlural$/" + $entity$Id)
+        .patch(BASE_PATH + "/$apicontext$/" + $entity$Id)
         .then().status(HttpStatus.BAD_REQUEST);
   }
 
@@ -178,7 +178,7 @@ class $Entity$ControllerTest {
     // THEN
     givenController()
         .body($entity$DeltaDto).when()
-        .patch(BASE_PATH + "/$entityPlural$/" + $entity$Id)
+        .patch(BASE_PATH + "/$apicontext$/" + $entity$Id)
         .then().status(HttpStatus.BAD_REQUEST);
   }
 }

@@ -19,22 +19,10 @@ public class $Entity$ApplicationService {
   private final $Entity$Service $entity$Service;
 
   public Mono<$Entity$> update$Entity$($Entity$DeltaDto delta, String $entity$Id) {
-    return validateDelta(delta)
-        .then($entity$Service.get$Entity$($entity$Id))
-        .flatMap($entity$ -> apply$Entity$Delta($entity$, delta))
+    return $entity$Service.get$Entity$($entity$Id)
         //TODO
+        .flatMap($entity$ -> applyDelta($entity$, delta, List.of()))
         .flatMap($entity$Service::validate)
         .flatMap($entity$Service::save$Entity$);
-  }
-
-  private Mono<$Entity$DeltaDto> validateDelta($Entity$DeltaDto delta) {
-    //TODO
-    return Mono.just(delta);
-  }
-
-  private Mono<$Entity$> apply$Entity$Delta($Entity$ $entity$, $Entity$DeltaDto delta) {
-    //TODO
-    applyDelta($entity$, delta, List.of());
-    return Mono.just($entity$);
   }
 }

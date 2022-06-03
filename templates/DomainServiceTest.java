@@ -44,7 +44,7 @@ public class $Entity$ServiceTest {
     // THEN
     StepVerifier.create($entity$Service.create$Entity$(valid$Entity$)).expectNextCount(1)
         .verifyComplete();
-    verify($entity$Repository, times(1)).save(valid$Entity$);
+    verify($entity$Repository, times(1)).insert(valid$Entity$);
   }
 
   @Test

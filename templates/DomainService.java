@@ -58,4 +58,8 @@ public class $Entity$Service {
     return $entity$Repository.save($entity$);
   }
 
+  public Mono<$Entity$> validatedSave($Entity$ $entity$) {
+    return validate($entity$).flatMap($entity$Repository::save);
+  }
+
 }

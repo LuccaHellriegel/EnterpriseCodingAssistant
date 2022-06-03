@@ -74,7 +74,6 @@ public class $Entity$ApplicationServiceTest {
     StepVerifier.create($entity$ApplicationService.update$Entity$(delta, $entity$.getId()))
         .expectError(Invalid$Entity$Exception.class);
     verify($entity$Service, times(1)).get$Entity$($entity$.getId());
-    verify($entity$Service, times(1)).validate($entity$);
     verify($entity$Service, times(0)).save$Entity$($entity$);
   }
 
@@ -91,7 +90,6 @@ public class $Entity$ApplicationServiceTest {
     StepVerifier.create($entity$ApplicationService.update$Entity$(delta, $entity$.getId()))
         .expectError(Duplicate$Entity$Exception.class);
     verify($entity$Service, times(1)).get$Entity$($entity$.getId());
-    verify($entity$Service, times(1)).validate($entity$);
     verify($entity$Service, times(0)).save$Entity$($entity$);
   }
 
